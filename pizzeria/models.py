@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Size(models.Model):
     name = models.CharField(max_length=100)
-    diameter = models.DecimalField(max_digits=2)
+    diameter = models.IntegerField()
 
     class Meta:
         ordering = ['name']
@@ -23,24 +23,27 @@ class State(models.Model):
         return self.name
 
 
-class Courier:
+class Courier(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
 
-class Client:
+class Client(models.Model):
     phone_regex = RegexValidator(
         regex=r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$',
         message="Phone number must be in the format: '+375 (29) XXX-XX-XX'")
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, validators=[phone_regex], default='+375 (29) XXX-XX-XX')
     address = models.CharField(max_length=100)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
+
+    class Meta:
+        ordering = ['phone']
 
 
 class PizzaType(models.Model):
@@ -57,16 +60,16 @@ class PizzaType(models.Model):
         return self.name
 
 
-class Order:
-    pizza = models.ForeignKey(PizzaType, on_delete=models.PROTECT)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
+class Order(models.Model):
+    pizza = models.ManyToManyField(PizzaType)
+    state = models.ForeignKey(State, on_delete=models.CASCADE, default='none')
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, default='cart')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return f'Order #{self.pk}'
+        return f'Order №{self.pk}'
