@@ -17,6 +17,23 @@ menu = [{'title': 'Pizza', 'url_name': 'pizza'},
         ]
 
 
+def main(request):
+    pizzas = PizzaType.objects.all()
+    weather = get_weather()
+
+    filtered_pizzas = []
+
+    for pizza in pizzas:
+        if pizza.size.name == 'middle':
+            filtered_pizzas.append(pizza)
+
+    context = {"pizzas": filtered_pizzas,
+               'weather': weather,
+               'menu': menu, }
+
+    return render(request, 'pizzeria/main.html', context=context)
+
+
 def get_weather():
     appid = '91d45fb3f775b8f850579a41205a2a39'
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
@@ -49,13 +66,3 @@ def logIn(request):
 
 def cart(request):
     return HttpResponse("cart")
-
-
-def main(request):
-    pizzas = PizzaType.objects.all()
-    weather = get_weather()
-    context = {"pizza_list": pizzas,
-               'weather': weather,
-               'menu': menu, }
-
-    return render(request, 'pizzeria/base.html', context=context)
