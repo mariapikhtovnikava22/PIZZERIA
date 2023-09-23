@@ -1,0 +1,8 @@
+superuser:
+login: pikht
+password: 2486202
+
+client:
+login: mary
+password: qwerty555
+

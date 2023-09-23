@@ -3,6 +3,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Size(models.Model):
@@ -27,7 +28,7 @@ class Courier(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.username}'
 
 
 class Client(models.Model):
@@ -40,7 +41,7 @@ class Client(models.Model):
     address = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.username}'
 
     class Meta:
         ordering = ['phone']
@@ -59,10 +60,13 @@ class PizzaType(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'post_id': self.pk})
+
 
 class Order(models.Model):
     pizza = models.ManyToManyField(PizzaType)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, default='none')
+    state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, default='cart')

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta name = 'description' content="Pizzeria time">
+    {% block title %}
+      <title>PizzaTime</title>
+    {% endblock %}
+    <meta charset="UTF-8">
+</head>
+<body>
+{% block header%}
+<header>
+  <nav class = 'header navigation'>
+    <div class = 'inline panel'>
+      <ul>
+          <li style='display: inline; margin-right: 10px;'> <a href="{% url 'about' %}" style="text-decoration: none; color: inherit;">About us</a> </li>
+          <li style='display: inline; margin-right: 10px;'> <a href="{% url 'contacts' %}" style="text-decoration: none; color: inherit;" >Contacts</a></li>
+          <li style='display: inline; margin-right: 1000px;'> <a href="#" style="text-decoration: none; color: inherit;" >Terms of delivery</a></li>
+          <li style='display: inline; margin-right: 10px;'> <a href="{% url 'logIn' %}" style="text-decoration: none; color: inherit;" >Log In</a></li>
+      </ul>
+    </div>
+  </nav>
+    <hr>
+</header>
+{% endblock header%}
+
+
+<div style="margin: 0; padding: 0; width: 100%; overflow: hidden;">
+    <img src="{% static 'pizzeria/images/rec.png' %}" style="width: 100%; height: auto; display: block;">
+</div>
+
+
+{% block main %}
+
+<main>
+
+    <div class = 'mainmenu' >
+        <ul style="padding:0">
+          {% for m in menu %}
+            {% if not forloop.revcounter <= 2  %}
+            <li style='display: inline; margin-right: 50px;'><a href="{% url m.url_name %}" style="text-decoration: none; color: inherit;">{{ m.title }}</a></li>
+            {% elif forloop.revcounter == 2  %}
+            <li class="prelast" style='display: inline; margin-right: 1000px;'><a href="#promo" style="text-decoration: none; color: inherit;">{{ m.title }}</a></li>
+            {% else %}
+            <li class="Lst" style='display: inline; margin-right: 20px;'><a href="{% url m.url_name %}" style="text-decoration: none; color: inherit;">{{ m.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        </div>
+
+    <div class = 'often-ordered'>
+        <hr>
+          <p style = 'font-size: 20px'>OFTEN ORDERED</p>
+        <hr>
+        {% block oftenorder %}
+        {% endblock oftenorder %}
+    </div>
+
+    <section class = 'maincontent'>
+        <article>
+        <h2>Pizza</h2>
+            {% block pizzacontent %}
+            {% endblock pizzacontent %}
+        </article>
+    <article id = "promo">
+        <h2>Promotions</h2>
+        {% block promocontent %}
+        {% endblock promocontent %}
+    </article>
+    </section>
+
+</main>
+{% endblock main %}
+
+<footer>
+      <p>©Авторские права никому не принадлежат, 2050. Все права защищены.</p>
+</footer>
+
+</body>
+</html>

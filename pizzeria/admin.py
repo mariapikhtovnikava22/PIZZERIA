@@ -7,11 +7,18 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['state', 'client', 'courier', 'slug', 'created']
     list_filter = ['state']
 
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
 
 @admin.register(PizzaType)
 class PizzaTypeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'size', 'slug']
+    list_display = ('name', 'price', 'size', 'slug')
     list_filter = ['size', 'name']
+    prepopulated_fields = {'slug': ('name',)}
 
 
 @admin.register(Client)
