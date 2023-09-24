@@ -27,9 +27,16 @@
                   Terms of delivery
               </a></li>
           <li style='display: inline; margin-right: 10px;'>
-              <a href="{% url 'logIn' %}" style="text-decoration: none; color: inherit;" >
-                  Log In
-              </a></li>
+              {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <a style="text-decoration: none; color: inherit;"  href="/admin/">Personal Account</a>
+                {% else %}
+                    <a style="text-decoration: none; color: inherit;"  href="{% url 'personal_account' %}">Personal Account</a>
+                {% endif %}
+              {% else %}
+                <a style="text-decoration: none; color: inherit;"  href="/accounts/login/">Personal Account</a>
+              {% endif %}
+          </li>
       </ul>
     </div>
   </nav>
@@ -37,15 +44,11 @@
 </header>
 {% endblock %}
 
-
+{% block main %}
 <div style="margin: 0; padding: 0; width: 100%; overflow: hidden; ">
     <img src="{% static 'pizzeria/images/rec.png' %}"
          style="width: 100%; height: auto; display: block;", alt = 'Simple pic', title = 'Some text' >
 </div>
-
-
-{% block main %}
-
 <main style="margin:8px">
     <div class = 'mainmenu' >
         <ul style="padding:0">
@@ -67,30 +70,30 @@
                 </a></li>
             {% else %}
             <li class="Lst" style='display: inline; margin-right: 20px;'>
-                <a href="{% url m.url_name %}" style="text-decoration: none; color: inherit;">
-                    {{ m.title }}
-                </a></li>
+                {% block cartref %}
+                {{ m.title }}
+                {% endblock %}
+            </li>
             {% endif %}
             {% endfor %}
         </ul>
         </div>
 
-    <div class = 'often-ordered'>
+    <div class = 'often-ordered' align="center">
         <hr>
-        <p style = 'font-size: 20px'><b><em>OFTEN ORDERED</em></b></p>
-        <hr>
+        <p style = 'font-size: 30px'><b>OFTEN ORDERED</b></p>
         {% block oftenorder %}
         {% endblock oftenorder %}
     </div>
 
     <section class = 'maincontent'>
         <article id = 'pizza'>
-        <h2>Pizza</h2>
+        <h2 align="center", style = 'font-size:70px'>PIZZA</h2>
             {% block pizzacontent %}
             {% endblock  %}
         </article>
     <article id = "promo">
-        <h2>Promotions</h2>
+        <h2 align="center", style = 'font-size:70px'>PROMOTIONS</h2>
         {% block promocontent %}
         {% endblock  %}
     </article>
@@ -100,7 +103,9 @@
 {% endblock %}
 
 <footer>
-      <p>©Авторские права никому не принадлежат, 2050. Все права защищены.</p>
+    <hr>
+      <p>©Авторские права никому не принадлежат, 2023. Все права защищены.</p>
+    <hr>
 </footer>
 
 </body>

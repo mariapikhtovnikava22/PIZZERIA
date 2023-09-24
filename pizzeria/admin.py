@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PizzaType, Order, Client, Courier, Size, State
+from .models import PizzaType, Order, Client, Courier, Size, State, Cart
 
 
 @admin.register(Order)
@@ -39,3 +39,8 @@ class SizeAdmin(admin.ModelAdmin):
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = [ 'user']

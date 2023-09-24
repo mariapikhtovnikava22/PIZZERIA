@@ -1,0 +1,13 @@
+{% extends 'pizzeria/base.html' %}
+
+{% block main %}
+  <h1>Cart</h1>
+  {% if pizza_list %}
+    {% for pizza in pizza_list %}
+        <h4>{{ pizza.name }}</h4>
+        <img src="{{ pizza.image.url }}" alt="Pizza's image">
+        <p>Size: {{ pizza.size }}</p>
+        <p>Price: {{ pizza.price }}$</p>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

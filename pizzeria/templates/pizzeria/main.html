@@ -4,25 +4,46 @@
 {% block pizzacontent %}
 <table class="table-content" border="0" cellpadding="0" cellspacing="100px" align="center">
     <tr style=" text-align: center;">
-        {% for p in pizzas %}
+        {% for p in pizzass %}
         {% if forloop.counter0|divisibleby:3 and not forloop.first %}
         </tr><tr style=" text-align: center;">
         {% endif %}
         <td valign="top" class="left-chapters">
-            {% if p.image %}
+            {% if p.0.image %}
             <p>
-                <a href="#">
-                    <img class="img-article" src="{{p.image.url}}" alt="burger pizza" width="300" height="300">
+                <a href="{{ p.0.get_absolute_url }}">
+                    <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width="300" height="300" title = "{{ p.0.name }}">
                 </a>
             </p>
             {% endif %}
-            <h2>{{p.name}}</h2>
-            <div style="display: inline">
-                <h3>{{p.price}}</h3>
-                <a href="#">
-                    <button type="button" name="btn">Select</button>
-                </a>
-            </div>
+            <h2>{{p.0.name}}</h2>
+            {% load filters %}
+            {% if user|is_client %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" id="pizza_name" name="pizza_name" value="{{ p.0.name }}">
+                <label for="size" style = "font-size:20px">Choose size</label>
+                <select id="size" size="1" name="size" onchange="updateSizeField(this,'{{p.0.name}}')" style = "font-size:15px">
+                    {% for s in p %}
+                        <option {% if forloop.last %} selected {% endif %} value='{{ s.price }}'>
+                            {{ s.size.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <input type="text" id="{{p.0.name}}" value="{{ p.2.price }}" readonly
+                       style = "border: none; outline:none; text-align: center; font-size:15px;font-weight:bold;">
+                <br><br>
+                <input type="submit" value="Add">
+            </form>
+            {% endif %}
+
+            <script>
+            function updateSizeField(select, id) {
+                var selectedSize = select.options[select.selectedIndex].value;
+                document.getElementById(id).value = selectedSize;
+            }
+            </script>
         </td>
         {% endfor %}
     </tr>
@@ -34,3 +55,11 @@
 
 {% endblock %}
 
+{% block cartref %}
+{% load filters %}
+{% if user|is_client %}
+ <a href="{% url 'cart' %}" style="text-decoration: none; color: inherit;">
+     {{ m.title }} ({{ count }})
+ </a>
+{% endif %}
+{% endblock %}

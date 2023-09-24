@@ -61,7 +61,19 @@ class PizzaType(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_id': self.pk})
+        return reverse('pizza', kwargs={'pizza_id': self.pk})
+
+
+class Cart(models.Model):
+
+    user = models.OneToOneField(Client, on_delete=models.CASCADE)
+    pizza = models.ManyToManyField(PizzaType)
+
+    def __str__(self):
+        return f'Order №{self.pk}'
+
+    def get_absolute_url(self):
+        return reverse('cart', kwargs={'cart_id': self.pk})
 
 
 class Order(models.Model):
@@ -77,3 +89,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order №{self.pk}'
+
+    def get_absolute_url(self):
+        return reverse('order', kwargs={'order_id': self.pk})
+
