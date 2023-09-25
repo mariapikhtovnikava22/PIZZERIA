@@ -2,12 +2,42 @@
 
 {% block main %}
 
-    <h1>Hello, {{ user.username }}!</h1>
-
-    <ul>
-        <li><a href="#">My Profile</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="/accounts/logout/">Log out</a></li>
+<h1  style="font-size: 40px; margin-left:50px">Hi, {{ user.username }}</h1> <br>
+<a href="/accounts/logout/" style="text-decoration: none; color: inherit; font-size:25px; margin:50px;">Log out</a>
+{% if order_list %}
+      <ul style="list-style: none; font-size: 20px; text-align: center; padding:0">
+      {% for item in order_list %}
+        <li align="center">
+          <div align="center" style="display: inline-block; text-align: center; margin-right: 50px; font-size:25px;">
+            <h1>Order №{{ item.id }}</h1>
+              <hr>
+              <p style = 'font-size:20px; text-align:left;' >Time of order: {{ item.created }}</p><hr>
+              <p>Courier: <em>{{ item.courier.user.first_name }}</em></p>
+              <p>State: <em>{{ item.state }}</em></p>
+              <h2>Your Pizzas</h2>
+              {% for i in item.items.all %}
+              <ul style="list-style: none; font-size: 17px;">
+                  <li>
+                     ` <div  style="display: inline-block; text-align: center; margin-right: 50px;">
+                            <h3>{{ i.pizza.name }}</h3>
+                            <img src="{{ i.pizza.image.url }}" alt="Pizza's image" width="200" height="200">
+                            <h3>Size: {{ i.pizza.size }}</h3>
+                            <p>Price: {{ i.pizza.price }}$</p>
+                      </div>`
+        </li>
+              </ul>
+              {% endfor %}
+          </div>
+        </li>
+          {% if not forloop.last %}
+          <hr>
+          {% endif %}
+          {% endfor %}
+          <li align = 'left' style = 'margin:50px; font-size:30px;'>
+              {% load filters %}
+              <p>Total Price: <b>{{ order_list|calculate_total_price }} $</b> </p>
+          </li>
     </ul>
+{% endif %}
 
 {% endblock %}

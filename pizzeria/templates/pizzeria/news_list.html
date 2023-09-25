@@ -1,0 +1,15 @@
+{% extends 'pizzeria/base.html' %}
+
+{% block main %}
+<h1 style="font-size: 40px; margin-left:50px" align="center">News</h1>
+<ul style="list-style: none; font-size: 20px; padding:10; margin-right:70px">
+    {% for article in articles %}
+      <li>
+        <h2>{{ article.title }}</h2>
+        <img src="{{ article.image.url }}" alt="{{ article.title }}" width="450", height="400">
+          <wbr>{{ article.content }}<wbr>
+          <a href="{% url 'news_detail' article.pk %}">Читать далее</a>
+      </li>
+    {% endfor %}
+</ul>
+{% endblock %}

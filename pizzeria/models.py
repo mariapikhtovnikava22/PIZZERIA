@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from django.core.validators import RegexValidator
 from django.db import models
@@ -65,9 +66,8 @@ class PizzaType(models.Model):
 
 
 class Cart(models.Model):
-
     user = models.OneToOneField(Client, on_delete=models.CASCADE)
-    pizza = models.ManyToManyField(PizzaType)
+    items = models.ManyToManyField('CartItem')
 
     def __str__(self):
         return f'Order №{self.pk}'
@@ -76,12 +76,15 @@ class Cart(models.Model):
         return reverse('cart', kwargs={'cart_id': self.pk})
 
 
+class CartItem(models.Model):
+    pizza = models.ForeignKey(PizzaType, on_delete=models.CASCADE)
+
+
 class Order(models.Model):
-    pizza = models.ManyToManyField(PizzaType)
+    items = models.ManyToManyField(CartItem)
     state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=255, unique=True, default='cart')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -93,3 +96,47 @@ class Order(models.Model):
     def get_absolute_url(self):
         return reverse('order', kwargs={'order_id': self.pk})
 
+
+class Promo(models.Model):
+    name = models.CharField(max_length=150)
+    image = models.ImageField(upload_to="images/")
+    code = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    expiration_date = models.DateTimeField()
+    is_archived = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.name
+
+    def is_active(self):
+        # Проверяем, активен ли промокод, сравнивая текущую дату с expiration_date
+        return timezone.now() <= self.expiration_date
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')])
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    image = models.ImageField(upload_to='news/images/')
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

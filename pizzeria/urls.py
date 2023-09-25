@@ -8,10 +8,13 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('contacts/', contacts, name='contacts'),
     path('personal_account/', personal_account, name='personal_account'),
-    path('order/<int:order_id>/', showcart, name='order'),
     path('pizza/<int:pizza_id>/', pizza, name='pizza'),
-    path('news', news, name='news'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/registration/', registration, name='registration'),
-    path('cart/', cart, name='cart')
+    path('cart/', cart, name='cart'),
+    path('faq/', faq, name='faq'),
+    path('reviews/', add_review, name='reviews'),
+    path('news/', news_list, name='news_list'),
+    path('news/<int:article_id>/', news_detail, name='news_detail'),
+
 ]

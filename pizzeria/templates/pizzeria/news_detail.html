@@ -1,0 +1,11 @@
+{% extends 'pizzeria/base.html' %}
+
+{% block main %}
+
+<article>
+    <h1 style="font-size: 40px; margin-left:50px" align="center">{{ article.title }}</h1>
+    <img align="center" src="{{ article.image.url }}" alt="{{ article.title }}" width="450", height="400">
+    <p style="font-size: 30px; padding:10; margin-right:70px">{{ article.content }}</p>
+</article>
+
+{% endblock %}

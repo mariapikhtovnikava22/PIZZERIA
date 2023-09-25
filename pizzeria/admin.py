@@ -1,17 +1,11 @@
 from django.contrib import admin
-from .models import PizzaType, Order, Client, Courier, Size, State, Cart
+from .models import PizzaType, Order, Client, Courier, Size, State, Cart, Promo, Review, FAQ, Article
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['state', 'client', 'courier', 'slug', 'created']
+    list_display = ['state', 'client', 'courier', 'created']
     list_filter = ['state']
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_add_permission(self, request):
-        return False
 
 
 @admin.register(PizzaType)
@@ -24,6 +18,11 @@ class PizzaTypeAdmin(admin.ModelAdmin):
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ['user', 'phone', 'address']
+
+
+@admin.register(Promo)
+class PromoAdmin(admin.ModelAdmin):
+    list_display = ['name', 'is_archived', 'expiration_date', 'code']
 
 
 @admin.register(Courier)
@@ -43,4 +42,19 @@ class StateAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = [ 'user']
+    list_display = ['user']
+
+
+@admin.register(Review)
+class RewievAdmin(admin.ModelAdmin):
+    list_display = ['user', 'rating', 'date']
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ['question', 'answer', 'date_added']
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'pub_date']

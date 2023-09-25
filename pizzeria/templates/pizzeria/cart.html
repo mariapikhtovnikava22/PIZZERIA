@@ -1,13 +1,44 @@
 {% extends 'pizzeria/base.html' %}
 
 {% block main %}
-  <h1>Cart</h1>
-  {% if pizza_list %}
-    {% for pizza in pizza_list %}
-        <h4>{{ pizza.name }}</h4>
-        <img src="{{ pizza.image.url }}" alt="Pizza's image">
-        <p>Size: {{ pizza.size }}</p>
-        <p>Price: {{ pizza.price }}$</p>
-    {% endfor %}
-  {% endif %}
+<main style = 'margin:0px'>
+      <ul style="list-style: none; font-size: 20px; text-align: center; padding:0">
+          <li align="center">
+              <div align="center" style="display: inline-block; text-align: center; margin-right: 50px;">
+                 <h1  style="font-size: 40px;">Your Cart</h1> <br><br><br>
+             </div>
+          </li>
+          {% if pizza_list %}
+      {% for item in pizza_list %}
+          <form method = 'post'>
+            {% csrf_token %}
+          <input type="hidden" name="item_id" value="{{ item.id }}">
+        <li align="center">
+          <div align="center" style="display: inline-block; text-align: center; margin-right: 50px;">
+            <h3>{{ item.pizza.name }}</h3>
+            <img src="{{ item.pizza.image.url }}" alt="Pizza's image" width="300" height="300">
+            <h3>Size: {{ item.pizza.size }}</h3>
+            <p>Price: {{ item.pizza.price }}$</p>
+              <input type = 'submit' value="Delete" style="font-size:16px">
+          </div>
+        </li>
+              <hr>
+          </form>
+          {% endfor %}
+    </ul>
+
+    <ul style="list-style: none; font-size: 30px;" >
+        <li style='display: inline;'>
+              {% load filters %}
+              <p>Total Price: <b>{{ pizza_list|total_price }} $</b> </p>
+        </li>
+        <li style='display: inline; margin-right: 10px;'>
+            <form method="post">
+                 {% csrf_token %}
+                <input type = 'submit' value="Order" name="order" style = 'font-size:20px; text-align:center;'>
+            </form>
+        </li>
+        {% endif %}
+    </ul>
+</main>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'pizzeria/base.html' %}
+
+
+{% block main %}
+
+<h2 align="center", style = 'font-size:50px'>REVIEWS</h2>
+
+{% if user.is_authenticated %}
+    <form method="post" style="margin-right:800px">
+        <fieldset title="Review form" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+        </fieldset>
+    </form>
+{% else %}
+    <p>If you want to add review, <a href="{% url 'login' %}">Log In</a>.</p>
+{% endif %}
+
+{% for review in reviews %}
+    <p>Name: {{ review.user.username }}</p>
+    <p>Rate: {{ review.rating }}</p>
+    <p>Text: {{ review.text }}</p>
+    <p>Date: {{ review.date }}</p>
+<hr>
+{% endfor %}
+
+
+{% endblock  %}

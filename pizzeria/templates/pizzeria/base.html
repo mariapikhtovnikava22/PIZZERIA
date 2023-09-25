@@ -2,10 +2,11 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta name = 'description' content="Pizzeria time">
+    <meta name = 'description' content="Pizzeria time" author="Pikhtovnikova Maria" decription ='pizza shop'>
     {% block title %}
       <title>PizzaTime</title>
     {% endblock %}
+    <link rel="icon" href="{% static 'pizzeria/images/icons8.png' %}" type="image/x-icon">
     <meta charset="UTF-8">
 </head>
 <body style = 'margin:0px'>
@@ -22,10 +23,19 @@
               <a href="{% url 'contacts' %}" style="text-decoration: none; color: inherit;" >
                   Contacts
               </a></li>
-          <li style='display: inline; margin-right: 1000px;'>
+          <li style='display: inline; margin-right: 10px;'>
               <a href="#" style="text-decoration: none; color: inherit;" >
                   Terms of delivery
               </a></li>
+           <li style='display: inline; margin-right: 10px;'>
+              <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;" >
+                  Home
+              </a></li>
+          <li style='display: inline; margin-right: 950px;'>
+              <a href="{% url 'faq' %}" style="text-decoration: none; color: inherit;" >
+                  FAQ
+              </a>
+          </li>
           <li style='display: inline; margin-right: 10px;'>
               {% if user.is_authenticated %}
                 {% if user.is_superuser %}
@@ -64,7 +74,7 @@
                     {{ m.title }}
                 </a></li>
             {% elif forloop.revcounter == 2  %}
-            <li class="prelast" style='display: inline; margin-right: 1000px;'>
+            <li class="prelast" style='display: inline; margin-right: 850px;'>
                 <a href="#promo" style="text-decoration: none; color: inherit;">
                     {{ m.title }}
                 </a></li>
@@ -88,7 +98,7 @@
 
     <section class = 'maincontent'>
         <article id = 'pizza'>
-        <h2 align="center", style = 'font-size:70px'>PIZZA</h2>
+        <h2 align="center", style = 'font-size:70px; margin-top: 0px;"'>PIZZA</h2>
             {% block pizzacontent %}
             {% endblock  %}
         </article>
