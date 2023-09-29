@@ -1,0 +1,49 @@
+{% extends 'pizzeria/base.html' %}
+{% load static %}
+{% block main %}
+<section>
+  <figure>
+  <figcaption><h1 align="center"> WE </h1></figcaption>
+    <p><a href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf"><img src="{% static 'pizzeria/images/pizzatimelogo(mini).png' %}" alt="logo"></a></p>
+    <p style = 'margin-left:50px; margin-right:50px; font-size:45px;'>
+    <wbr>Usually people come to Pizza Time just to eat. Our promoters distribute leaflets about a slice of pizza for one ruble or something else profitable. We are doing this as the first step to get to know each other.
+
+But for us, Dodo is not just pizza. It's pizza too, but first of all it's a big deal that inspires us, makes us wake up every morning and continue working with interest.
+
+What is our interest? Let's tell you now.
+</p>
+</figure>
+  <article align="center">
+      <h1 align="center" style = 'font-size:30px'>Our history</h1>
+      <iframe width="560" height="349" src="https://www.youtube.com/embed/mxR3aGGBXt0" frameborder="0" allowfullscreen></iframe>
+      <dl>
+          <dt> <h1 style = 'font-size:30px'><time datetime="1984-12-7">December 7th</time></h1></dt>
+         <dd style = 'font-size: 30px'>
+           Date of the company's <abbr title = 'pizza time'>PT</abbr> appearance on the market
+         </dd>
+          <dt><h1 style = 'font-size:30px'><time datetime="1985-1-12">January 12th</time></h1></dt>
+         <dd style = 'font-size: 30px'>
+             The first million buyers in our small company:-
+             <dfn title = 'small company'><wbr>The name of commercial enterprises that do not exceed certain indicators. Otherwise, they are classified as large enterprises.</dfn>
+         </dd>
+          <dt> <h1 style = 'font-size:30px'><time datetime="1985-7-25">July 12th</time></h1></dt>
+         <dd style = 'font-size: 30px'>
+           Our company has its own status:
+             <p>
+                 <blockquote cite = 'https://interesnoe.me/source-30081607/post-323092'><em>A good day starts with pizza</em></blockquote>
+             </p>
+         </dd>
+          <dt> <h1 style = 'font-size:30px'><time datetime="1985-8-26">August 26th</time></h1></dt>
+         <dd style = 'font-size: 30px'>
+           <wbr>One programmer, after visiting our restaurant, wrote us his review in the form of a code, now we keep this warm memory of the responsiveness of our customers
+             <p><code>
+                  var string = 'Good and delicious pizza is about you'
+                  document.writeln(string);
+             </code></p>
+         </dd>
+    </dl>
+
+  </article>
+</section>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'pizzeria/base.html' %}
 
-
+{% load static %}
 {% block pizzacontent %}
 <table class="table-content" border="0" cellpadding="0" cellspacing="100px" align="center">
     <tr style=" text-align: center;">
@@ -11,9 +11,7 @@
         <td valign="top" class="left-chapters">
             {% if p.0.image %}
             <p>
-                <a href="{{ p.0.get_absolute_url }}">
-                    <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width="300" height="300" title = "{{ p.0.name }}">
-                </a>
+                <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width="300" height="300" title = "{{ p.0.name }}">
             </p>
             {% endif %}
             <h2>{{p.0.name}}</h2>
@@ -51,6 +49,8 @@
 
 {% endblock %}
 
+
+
 {% block promocontent %}
 <table class="table-promo" border="0" cellpadding="0" cellspacing="100px" align="center">
     <tr style=" text-align: center;" align="center">
@@ -86,4 +86,75 @@
      {{ m.title }} ({{ count }})
  </a>
 {% endif %}
+{% endblock %}
+
+
+{% block footer %}
+
+<table class="footer" border="0" cellpadding="20px" cellspacing="0px">
+    <tr style="margin-left: 50px; font-size: 30px">
+        <td style="margin-left: 50px" width="1100" align="left">
+            <strong align="center">Our partners</strong>
+        </td>
+        <td align="left">
+            <strong align="center">Contacts</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://lidskae.by/" style="text-decoration: none; color: inherit;" target="_blank">
+                <img class="img-article" src="{% static 'pizzeria/images/lidskae.png' %}" alt='lid bear'
+                    width="150" height="150">
+            </a>
+            <a href="https://coca-cola.by/company/news/coca-cola-bez-sakhara-vkus-kotory-ne-peredat-slovami"
+                style="text-decoration: none; color: inherit;" target="_blank">
+                <img class="img-article" src="{% static 'pizzeria/images/coca-cola.png' %}" alt='coca-colar'
+                    width="150" height="150">
+            </a>
+            <a href="https://www.heinz.ru/brand/Кетчуп" style="text-decoration: none; color: inherit;"
+                target="_blank">
+                <img class="img-article" src="{% static 'pizzeria/images/heinz.png' %}" alt='hienz'
+                    width="150" height="80">
+            </a>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <img class="img-article" src="{% static 'pizzeria/images/num.png' %}" alt='hienz'
+                            width="50" height="50">
+                    </td>
+                    <td>
+                        <a href="tel:7898" style="text-decoration: none; color: inherit; font-size: 25px">
+                            <p><em>7898</em></p>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="img-article" src="{% static 'pizzeria/images/addrres.png' %}" alt='hienz'
+                            width="60" height="60">
+                    </td>
+                    <td>
+                        <div align="right" style='font-size: 25px'>93 Prytytsky str.<br>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="img-article" src="{% static 'pizzeria/images/email.png' %}" alt='hienz'
+                            width="60" height="60">
+                    </td>
+                    <td>
+                        <div align="right" style='font-size: 20px'>
+                          <a href="mailto:pizzatime@mail.ru" style="text-decoration: none; color: inherit; font-size: 25px">pizzatime@mail.ru</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends 'pizzeria/base.html' %}
-
+{% load static %}
 {% block main %}
 <main style = 'margin:0px'>
       <ul style="list-style: none; font-size: 20px; text-align: center; padding:0">
+          {% if pizza_list %}
           <li align="center">
               <div align="center" style="display: inline-block; text-align: center; margin-right: 50px;">
                  <h1  style="font-size: 40px;">Your Cart</h1> <br><br><br>
              </div>
           </li>
-          {% if pizza_list %}
       {% for item in pizza_list %}
           <form method = 'post'>
             {% csrf_token %}
@@ -19,7 +19,7 @@
             <img src="{{ item.pizza.image.url }}" alt="Pizza's image" width="300" height="300">
             <h3>Size: {{ item.pizza.size }}</h3>
             <p>Price: {{ item.pizza.price }}$</p>
-              <input type = 'submit' value="Delete" style="font-size:16px">
+            <input type = 'submit' value="Delete" style="font-size:16px">
           </div>
         </li>
               <hr>
@@ -38,6 +38,12 @@
                 <input type = 'submit' value="Order" name="order" style = 'font-size:20px; text-align:center;'>
             </form>
         </li>
+        {% else %}
+         <div align="center" style="display: inline-block; text-align: center; margin-right: 50px;">
+                  <h2  >Opps... <br> Your cart is empty :((( </h2>
+             <img src = "{% static 'pizzeria/images/sad_human.png' %}" align="center" alt ='image for empty cart'>
+         </div>
+
         {% endif %}
     </ul>
 </main>

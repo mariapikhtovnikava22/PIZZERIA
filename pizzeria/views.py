@@ -1,16 +1,18 @@
 from datetime import date, timedelta
 
 import requests
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import ReviewForm
+from .forms import ReviewForm, CustomUserChangeForm
 from .models import *
 from django import forms
 from django.http import HttpResponseRedirect
 from django.db import transaction
+
+from plotly.graph_objs import Figure, Layout, Bar
 
 menu = [{'title': 'Pizza', 'url_name': 'pizza'},
         {'title': 'News', 'url_name': 'news_list'},
@@ -64,6 +66,40 @@ def faq(request):
     return render(request, 'pizzeria/faq.html')
 
 
+def info(request):
+    # static_info
+    pizza_count = PizzaType.objects.all().count()
+    orders_count = Order.objects.all().count()
+    couriers_count = Courier.objects.all().count()
+
+    orders = list(Order.objects.all())
+    pizza = dict()
+    for order in orders:
+        for item in list(order.items.all()):
+            if item.pizza in pizza:
+                pizza[item.pizza] += 1
+            else:
+                pizza[item.pizza] = 1
+    popular_pizza = max(pizza, key=pizza.get)
+    pizza_counts = list(pizza.values())
+    pizza_types = [str(pizza_) for pizza_ in pizza.keys()]
+    data = Bar(x=pizza_types, y=pizza_counts)
+    layout = Layout(title='Popular pizza',
+                    xaxis=dict(title='pizza types'),
+                    yaxis=dict(title='pizza counts'))
+    fig = Figure(data=data, layout=layout)
+    plot_div = fig.to_html(full_html=False)
+
+    context = {
+        'pizza_count': pizza_count,
+        'orders_count': orders_count,
+        'couriers_count': couriers_count,
+        'popular_pizza': popular_pizza,
+        'plot_div': plot_div
+    }
+    return render(request, 'pizzeria/info.html', context=context)
+
+
 def add_review(request):
     reviews = Review.objects.all()
     if request.method == 'POST':
@@ -105,6 +141,7 @@ def cart(request):
         client = Client.objects.filter(user=request.user).first()
         cart_ = Cart.objects.filter(user=client).first()
         pizza_ = cart_.items.all()
+
         context = {"pizza_list": pizza_}
 
         return render(request, 'pizzeria/cart.html', context=context)
@@ -141,28 +178,55 @@ def cart(request):
 
 
 def personal_account(request):
+
     if request.method == 'GET':
+        user = CustomUserChangeForm(instance=request.user)
         order_ = Order.objects.all()
         total_price = 0
 
         for order in order_:
-            # Получите список идентификаторов пицц в заказе
             pizza_ids = order.items.values_list('pizza', flat=True)
 
-            # Получите объекты PizzaType на основе идентификаторов
             pizzas_in_order = PizzaType.objects.filter(id__in=pizza_ids)
 
-            # Вычислите стоимость пицц в заказе
             order_price = sum(pizza.price for pizza in pizzas_in_order)
 
-            # Добавьте стоимость заказа к общей цене
             total_price += order_price
 
-        print(total_price)
-
-        context = {"order_list": order_, "total_price": total_price}
+        context = {"order_list": order_, "total_price": total_price, 'form': user}
 
         return render(request, 'pizzeria/personal.html', context=context)
+
+    if request.method == 'POST':
+        form = request.POST
+        if form.get('save'):
+            user_form = CustomUserChangeForm(request.POST, instance=request.user)
+            if user_form.is_valid():
+                user = user_form.save()
+                client, created = Client.objects.get_or_create(user=user)
+                client.address = request.POST.get('address')
+                client.phone = request.POST.get('phone')
+                client.save()
+
+                try:
+                    cart_ = Cart.objects.get(user=user)
+                except Cart.DoesNotExist:
+                    cart_ = Cart.objects.create(user=user)
+                cart_.save()
+
+                login(request, user)
+                update_session_auth_hash(request, user)
+
+            return redirect('home')
+        else:
+            print(form.get)
+            print('j')
+            item_id = form.get('item_id')
+            client = get_object_or_404(Client, user=request.user)
+            order = get_object_or_404(Order, id=item_id, client=client)
+            order.delete()
+
+            return HttpResponseRedirect(request.path_info)
 
 
 def pizza(request, pizza_id):
@@ -177,7 +241,7 @@ def pizza(request, pizza_id):
 
 
 def about(request):
-    return HttpResponse("About")
+    return render(request, 'pizzeria/about.html')
 
 
 def news(request):

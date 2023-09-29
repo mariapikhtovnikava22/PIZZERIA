@@ -4,9 +4,21 @@
 
 <h1  style="font-size: 40px; margin-left:50px">Hi, {{ user.username }}</h1> <br>
 <a href="/accounts/logout/" style="text-decoration: none; color: inherit; font-size:25px; margin:50px;">Log out</a>
+
+<details>
+    <summary>Edit</summary>
+    <form method="post">
+   {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" name ='save' value="Save Changes">
+        </form>
+</details>
 {% if order_list %}
       <ul style="list-style: none; font-size: 20px; text-align: center; padding:0">
       {% for item in order_list %}
+          <form method = 'post'>
+            {% csrf_token %}
+          <input type="hidden" name="item_id" value="{{ item.id }}">
         <li align="center">
           <div align="center" style="display: inline-block; text-align: center; margin-right: 50px; font-size:25px;">
             <h1>Order №{{ item.id }}</h1>
@@ -28,8 +40,14 @@
               </ul>
               {% endfor %}
           </div>
+
         </li>
-          {% if not forloop.last %}
+          <li>
+              <div  style="display: inline-block; text-align: center; margin-right: 50px;">
+              <input type = 'submit' value="Delete" style="font-size:16px">
+              </div>
+          </li>
+              {% if not forloop.last %}
           <hr>
           {% endif %}
           {% endfor %}
@@ -37,7 +55,10 @@
               {% load filters %}
               <p>Total Price: <b>{{ order_list|calculate_total_price }} $</b> </p>
           </li>
+              </form>
     </ul>
 {% endif %}
+
+
 
 {% endblock %}

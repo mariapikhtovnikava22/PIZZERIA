@@ -31,11 +31,15 @@
               <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;" >
                   Home
               </a></li>
-          <li style='display: inline; margin-right: 950px;'>
+          <li style='display: inline; margin-right: 10px;'>
               <a href="{% url 'faq' %}" style="text-decoration: none; color: inherit;" >
                   FAQ
               </a>
           </li>
+          <li style='display: inline; margin-right: 850px;'>
+              <a href= "{% url 'info' %}" style="text-decoration: none; color: inherit;">
+                  Static info
+              </a> </li>
           <li style='display: inline; margin-right: 10px;'>
               {% if user.is_authenticated %}
                 {% if user.is_superuser %}
@@ -64,7 +68,7 @@
         <ul style="padding:0">
           {% for m in menu %}
             {% if m.title == 'Pizza' %}
-            <li class="prelast" style='display: inline; margin-right: 50px;'>
+            <li class="prelast" style='display: inline; margin-right: 50px; margin-left:30px;'>
                 <a href="#pizza" style="text-decoration: none; color: inherit;">
                     {{ m.title }}
                 </a></li>
@@ -89,13 +93,7 @@
         </ul>
         </div>
 
-    <div class = 'often-ordered' align="center">
-        <hr>
-        <p style = 'font-size: 30px'><b>OFTEN ORDERED</b></p>
-        {% block oftenorder %}
-        {% endblock oftenorder %}
-    </div>
-
+   <hr style="margin-bottom: 100px;">
     <section class = 'maincontent'>
         <article id = 'pizza'>
         <h2 align="center", style = 'font-size:70px; margin-top: 0px;"'>PIZZA</h2>
@@ -107,16 +105,23 @@
         {% block promocontent %}
         {% endblock  %}
     </article>
+
+
     </section>
 
 </main>
 {% endblock %}
 
-<footer>
+<footer style = 'margin:0px'>
+    <hr>
+    {% block footer %}
+    {% endblock %}
     <hr>
       <p>©Авторские права никому не принадлежат, 2023. Все права защищены.</p>
     <hr>
 </footer>
+
+
 
 </body>
 </html>

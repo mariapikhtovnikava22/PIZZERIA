@@ -7,7 +7,7 @@
       <li>
         <h2>{{ article.title }}</h2>
         <img src="{{ article.image.url }}" alt="{{ article.title }}" width="450", height="400">
-          <wbr>{{ article.content }}<wbr>
+          <wbr>{{article.content|truncatewords:20}}<wbr>
           <a href="{% url 'news_detail' article.pk %}">Читать далее</a>
       </li>
     {% endfor %}

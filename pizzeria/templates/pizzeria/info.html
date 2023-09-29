@@ -1,0 +1,28 @@
+{% extends 'pizzeria/base.html' %}
+
+{% block main %}
+<article id = "info">
+        <h2 align="center", style = 'font-size:70px'>STATIC INFO</h2>
+</article>
+   <h2>Static info</h2>
+    <table border="1">
+        <tr>
+            <th id="criterion"> Criterion</th>
+            <th id="pizza">Pizza</th>
+            <th id="orders">Orders</th>
+            <th id="couriers">Couriers</th>
+        </tr>
+        <tr>
+            <th id="count" headers="criterion">Count of...</th>
+            <td headers="pizza count">{{ pizza_count }}</td>
+            <td headers="orders count">{{ orders_count }}</td>
+            <td headers="couriers count">{{ couriers_count }}</td>
+        </tr>
+        <tr>
+            <th id="popular_pizza" headers="criterion">The most popular pizza</th>
+            <td headers="popular_pizza" colspan="3">{{ popular_pizza }}</td>
+        </tr>
+    </table>
+
+    {{ plot_div|safe }}
+{% endblock %}
