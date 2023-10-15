@@ -16,6 +16,6 @@ urlpatterns = [
     path('reviews/', add_review, name='reviews'),
     path('news/', news_list, name='news_list'),
     path('news/<int:article_id>/', news_detail, name='news_detail'),
-    path('info', info, name='info'),
+    path('infos', info, name='info'),
 
 ]

@@ -5,6 +5,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 
 class Size(models.Model):
@@ -135,6 +136,7 @@ class FAQ(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
+
     image = models.ImageField(upload_to='news/images/')
     pub_date = models.DateTimeField(auto_now_add=True)
 

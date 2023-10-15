@@ -1,11 +1,41 @@
 {% extends 'pizzeria/base.html' %}
 
-{% block main %}
+{% block title %}
+<title>{{ article.title }}</title>
+{% endblock %}
 
+{% block header %}
+<header>
+  <nav class = 'header navigation'>
+    <div class = 'inline panel'>
+      <ul>
+          <li style='display: inline; margin-right: 10px;'>
+              <a href="{% url 'news_list' %}" style="text-decoration: none; color: inherit;" >
+                  ALL NEWS
+              </a></li>
+          <li style='display: inline; margin-left: 80%;'>
+              {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <a style="text-decoration: none; color: inherit;"  href="/admin/">Personal Account</a>
+                {% else %}
+                    <a style="text-decoration: none; color: inherit;"  href="{% url 'personal_account' %}">Personal Account</a>
+                {% endif %}
+              {% else %}
+                <a style="text-decoration: none; color: inherit;"  href="/accounts/login/">Personal Account</a>
+              {% endif %}
+          </li>
+      </ul>
+    </div>
+  </nav>
+    <hr>
+</header>
+{% endblock %}
+
+{% block main %}
 <article itemscope itemtype="https://schema.org/Article">
     <h1 style="font-size: 40px; margin-left:50px" align="center" itemprop="{{ article.title }}">{{ article.title }}</h1>
-    <img align="center" src="{{ article.image.url }}" alt="{{ article.title }}" width="450", height="400">
-    <p style="font-size: 30px; padding:10; margin-right:70px" itemprop="text">{{ article.content }}</p>
+    <div align="center"><img src="{{ article.image.url }}" alt="{{ article.title }}" width="70%"></div>
+    <p style="font-size: 30px; margin-right:70px; margin-left:70px" itemprop="text">{{ article.content|safe }}</p>
 </article>
 
 {% endblock %}

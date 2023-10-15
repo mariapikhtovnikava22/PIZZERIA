@@ -1,10 +1,16 @@
 {% extends 'pizzeria/base.html' %}
 {% load static %}
+
+{% block title %}
+<title>About us</title>
+{% endblock %}
+
 {% block main %}
 <section>
   <figure>
   <figcaption><h1 align="center"> WE </h1></figcaption>
-    <p><a href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf"><img src="{% static 'pizzeria/images/pizzatimelogo(mini).png' %}" alt="logo"></a></p>
+    <p align="center"><a href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf">
+        <img src="{% static 'pizzeria/images/pizzatimelogo(mini).png' %}" alt="logo" width="500in"></a></p>
     <p style = 'margin-left:50px; margin-right:50px; font-size:45px;'>
     <wbr>Usually people come to Pizza Time just to eat. Our promoters distribute leaflets about a slice of pizza for one ruble or something else profitable. We are doing this as the first step to get to know each other.
 

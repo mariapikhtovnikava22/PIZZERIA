@@ -20,23 +20,14 @@
                   About us
               </a> </li>
           <li style='display: inline; margin-right: 10px;'>
-              <a href="{% url 'contacts' %}" style="text-decoration: none; color: inherit;" >
+              <a href="http://127.0.0.1:8000/#contacts" style="text-decoration: none; color: inherit;" >
                   Contacts
-              </a></li>
-          <li style='display: inline; margin-right: 10px;'>
-              <a href="#" style="text-decoration: none; color: inherit;" >
-                  Terms of delivery
               </a></li>
            <li style='display: inline; margin-right: 10px;'>
               <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;" >
                   Home
               </a></li>
-          <li style='display: inline; margin-right: 10px;'>
-              <a href="{% url 'faq' %}" style="text-decoration: none; color: inherit;" >
-                  FAQ
-              </a>
-          </li>
-          <li style='display: inline; margin-right: 850px;'>
+          <li style='display: inline; margin-right: 950px;'>
               <a href= "{% url 'info' %}" style="text-decoration: none; color: inherit;">
                   Static info
               </a> </li>
@@ -59,7 +50,7 @@
 {% endblock %}
 
 {% block main %}
-<div style="margin: 0; padding: 0; width: 100%; overflow: hidden; ">
+<div style="margin: 0; padding: 0; width: 100%; ">
     <img src="{% static 'pizzeria/images/rec.png' %}"
          style="width: 100%; height: auto; display: block;", alt = 'Simple pic', title = 'Some text' >
 </div>
@@ -105,10 +96,7 @@
         {% block promocontent %}
         {% endblock  %}
     </article>
-
-
     </section>
-
 </main>
 {% endblock %}
 

@@ -209,9 +209,9 @@ def personal_account(request):
                 client.save()
 
                 try:
-                    cart_ = Cart.objects.get(user=user)
+                    cart_ = Cart.objects.get(user=client)
                 except Cart.DoesNotExist:
-                    cart_ = Cart.objects.create(user=user)
+                    cart_ = Cart.objects.create(user=client)
                 cart_.save()
 
                 login(request, user)
