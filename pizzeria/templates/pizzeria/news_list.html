@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block main %}
-<ul style="list-style: none; font-size: 20px; margin:40px">
+<ul class="news_list" >
     {% for article in articles %}
       <li>
         <h2 align="center">{{ article.title }}</h2>
-        <img src="{{ article.image.url }}" alt="{{ article.title }}" width="100%", height="100%">
-          <p style = 'font-size:25px'><wbr>{{article.content|truncatewords:50|safe}}<wbr></p>
+        <img src="{{ article.image.url }}" alt="{{ article.title }}" width="100%" height="100%">
+          <p class ="main-p-in-news" style = 'font-size:25px'>{{article.content|safe}}<wbr></p>
           <a href="{% url 'news_detail' article.pk %}">Read more</a>
       </li>
     {% endfor %}

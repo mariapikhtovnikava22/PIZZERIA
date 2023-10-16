@@ -33,9 +33,13 @@
 
 {% block main %}
 <article itemscope itemtype="https://schema.org/Article">
-    <h1 style="font-size: 40px; margin-left:50px" align="center" itemprop="{{ article.title }}">{{ article.title }}</h1>
-    <div align="center"><img src="{{ article.image.url }}" alt="{{ article.title }}" width="70%"></div>
-    <p style="font-size: 30px; margin-right:70px; margin-left:70px" itemprop="text">{{ article.content|safe }}</p>
+  <div class="article-container">
+    <h1 itemprop="headline">{{ article.title }}</h1>
+    <div class="article-image">
+      <img src="{{ article.image.url }}" alt="{{ article.title }}">
+    </div>
+    <p itemprop="articleBody">{{ article.content|safe }}</p>
+  </div>
 </article>
 
 {% endblock %}

@@ -7,100 +7,109 @@
       <title>PizzaTime</title>
     {% endblock %}
     <link rel="icon" href="{% static 'pizzeria/images/icons8.png' %}" type="image/x-icon">
+    <link rel = 'stylesheet' type="text/css" href="{% static 'pizzeria/css/styles.css' %}">
+    <script src="{% static 'pizzeria/js/scroll.js' %}" defer></script>
     <meta charset="UTF-8">
 </head>
-<body style = 'margin:0px'>
+<body>
 {% block header%}
 <header>
-  <nav class = 'header navigation'>
-    <div class = 'inline panel'>
+  <nav class = 'header-navigation sticky-nav' id = 'navbar'>
+    <div class = 'inline_panel'>
       <ul>
-          <li style='display: inline; margin-right: 10px;'>
-              <a href="{% url 'about' %}" style="text-decoration: none; color: inherit;">
+          <li>
+              <a href="{% url 'about' %}">
                   About us
               </a> </li>
-          <li style='display: inline; margin-right: 10px;'>
-              <a href="http://127.0.0.1:8000/#contacts" style="text-decoration: none; color: inherit;" >
+          <li>
+              <a href="http://127.0.0.1:8000/#contacts">
                   Contacts
               </a></li>
-           <li style='display: inline; margin-right: 10px;'>
-              <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;" >
+           <li>
+              <a href="{% url 'home' %}">
                   Home
               </a></li>
-          <li style='display: inline; margin-right: 950px;'>
-              <a href= "{% url 'info' %}" style="text-decoration: none; color: inherit;">
+          <li>
+              <a href= "{% url 'info' %}">
                   Static info
               </a> </li>
-          <li style='display: inline; margin-right: 10px;'>
+          <li class = 'last'>
               {% if user.is_authenticated %}
                 {% if user.is_superuser %}
-                    <a style="text-decoration: none; color: inherit;"  href="/admin/">Personal Account</a>
+                    <a href="/admin/">Personal Account</a>
                 {% else %}
-                    <a style="text-decoration: none; color: inherit;"  href="{% url 'personal_account' %}">Personal Account</a>
+                    <a href="{% url 'personal_account' %}">Personal Account</a>
                 {% endif %}
               {% else %}
-                <a style="text-decoration: none; color: inherit;"  href="/accounts/login/">Personal Account</a>
+                <a href="/accounts/login/">Personal Account</a>
               {% endif %}
           </li>
       </ul>
     </div>
   </nav>
-    <hr>
 </header>
 {% endblock %}
 
 {% block main %}
-<div style="margin: 0; padding: 0; width: 100%; ">
-    <img src="{% static 'pizzeria/images/rec.png' %}"
-         style="width: 100%; height: auto; display: block;", alt = 'Simple pic', title = 'Some text' >
-</div>
-<main style="margin:8px">
-    <div class = 'mainmenu' >
-        <ul style="padding:0">
-          {% for m in menu %}
-            {% if m.title == 'Pizza' %}
-            <li class="prelast" style='display: inline; margin-right: 50px; margin-left:30px;'>
-                <a href="#pizza" style="text-decoration: none; color: inherit;">
-                    {{ m.title }}
-                </a></li>
-            {% elif not forloop.revcounter <= 2  %}
-            <li style='display: inline; margin-right: 50px;'>
-                <a href="{% url m.url_name %}" style="text-decoration: none; color: inherit;">
-                    {{ m.title }}
-                </a></li>
-            {% elif forloop.revcounter == 2  %}
-            <li class="prelast" style='display: inline; margin-right: 850px;'>
-                <a href="#promo" style="text-decoration: none; color: inherit;">
-                    {{ m.title }}
-                </a></li>
-            {% else %}
-            <li class="Lst" style='display: inline; margin-right: 20px;'>
-                {% block cartref %}
-                {{ m.title }}
-                {% endblock %}
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        </div>
 
-   <hr style="margin-bottom: 100px;">
+<main>
+
+    <div class="image-container" id = 'markscroll'>
+        <img src="{% static 'pizzeria/images/rec.png' %}" alt="Banner #1">
+        <img src="{% static 'pizzeria/images/rec2.png' %}" alt="Banner #2">
+        <img src="{% static 'pizzeria/images/rec3.png' %}" alt="Banner #3">
+        <img src="{% static 'pizzeria/images/rec4.png' %}" alt="Banner #4">
+    </div>
+
+
+    <nav class="mainnavigation">
+        <div class="inline_panel" >
+            <ul style="padding:0;">
+
+              {% for m in menu %}
+                {% if m.title == 'Pizza' %}
+                <li class="prelast">
+                    <a href="#pizza">
+                        {{ m.title }}
+                    </a></li>
+                {% elif not forloop.revcounter <= 2  %}
+                <li >
+                    <a href="{% url m.url_name %}">
+                        {{ m.title }}
+                    </a></li>
+                {% elif forloop.revcounter == 2  %}
+                <li class="prelast" style='display: inline; margin-right: 850px;'>
+                    <a href="#promo">
+                        {{ m.title }}
+                    </a></li>
+                {% else %}
+                <li class="Lst" >
+                    {% block cartref %}
+                    {{ m.title }}
+                    {% endblock %}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+
     <section class = 'maincontent'>
         <article id = 'pizza'>
-        <h2 align="center", style = 'font-size:70px; margin-top: 0px;"'>PIZZA</h2>
+        <h2 align="center">PIZZA</h2>
             {% block pizzacontent %}
             {% endblock  %}
         </article>
-    <article id = "promo">
-        <h2 align="center", style = 'font-size:70px'>PROMOTIONS</h2>
-        {% block promocontent %}
-        {% endblock  %}
-    </article>
+        <article id = "promo">
+            <h2 align="center">PROMOTIONS</h2>
+            {% block promocontent %}
+            {% endblock  %}
+        </article>
     </section>
 </main>
 {% endblock %}
 
-<footer style = 'margin:0px'>
+<footer style = 'margin:0px' class = 'block-footer'>
     <hr>
     {% block footer %}
     {% endblock %}

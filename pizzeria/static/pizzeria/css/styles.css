@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+SC:wght@200;300;400&family=Playfair+Display&family=Raleway:wght@100;300;700&display=swap');
+
+
+body
+{
+    background:#f7f7e9;
+    margin:0;
+    padding:0;
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+}
+
+
+/* navigation elements in base.html */
+
+[class*='navigation']
+{
+    border-top:3px solid gray;
+    border-bottom:3px solid gray;
+    background:#faf7de;
+    font-family: none;
+    top:0;
+}
+
+[class^='mainnav']
+{
+    margin-bottom:150px;
+
+}
+.inline_panel li
+{
+    display: inline;
+
+
+}
+
+.inline_panel li:nth-child(2n)
+{
+    display: inline;
+    margin-right:10px;
+    background:#e0e7bd;
+
+}
+
+.inline_panel a
+{
+    text-decoration: none;
+    color: #68685f;
+    transition: all 0.7s;
+}
+
+.inline_panel a:hover
+{
+    text-decoration: overline;
+    font-size:19px;
+    color:black;
+}
+
+
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transition: all 0.3s; /* Добавьте анимацию изменения прозрачности */
+
+}
+
+.mainnavigation ul
+{
+    margin-left:40px;
+}
+
+/* end nav panel in base.html */
+
+
+/* info table */
+
+
+
+
+/* Убрать двойные линии между ячейками внутри таблицы */
+.info-table {
+    border-collapse: collapse;
+}
+
+
+/* Горизонтальное и вертикальное выравнивание информации в ячейках */
+.info-table th, .info-table td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle; /*выравнивание по вертикальному центру ячейки*/
+}
+
+/* Стилизовать строки и столбцы */
+
+/* Стиль для первой строки таблицы */
+.info-table tr:first-child {
+    color: #502d4a;
+}
+
+/* Стиль для последней строки таблицы */
+.info-table tr:last-child {
+    color: #163a1e;
+    font-weight: 700;
+    font-style:bold;
+}
+
+/* Стиль для каждой четной строки таблицы */
+.info-table tr:nth-child(even) {
+    background-color: #ccccff;
+}
+
+/* Стиль для каждой нечетной строки таблицы */
+.info-table tr:nth-child(odd) {
+    background-color: #afb97d;
+}
+
+.info-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Настроить расположение таблицы на странице */
+.info-table {
+    margin: 0 auto;
+    width: 70%;
+}
+
+/* Оформить заголовок таблицы над таблицей */
+.info-table caption {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* block info*/
+
+/* block pizza */
+
+.choose-size
+{
+    display:inline;
+}
+
+.table-content {
+    display: grid;
+    margin:100px 30px;
+    grid-template-columns: repeat(3, 1fr); /* Изначально 3 элемента в ряду */
+    gap: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 50rem) { /* Если ширина окна менее 40rem (640px) */
+    .table-content {
+      grid-template-columns: repeat 1fr; /* 1 элемент в ряду */
+    }
+  }
+
+  .pizza_elements {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .img-article {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .pizza-form {
+    text-align: center;
+  }
+
+  .pizza-form label{
+    width: 60%;
+    text-align: center;
+  }
+
+  .select-size {
+    width: 20%;
+  }
+
+  .select-pizza-inp {
+    width: 50%;
+  }
+
+.select-size
+{
+    font-family: 'Playfair Display', serif;
+    border: 2px solid grey;
+    padding:2px;
+    background:#a5ac7f;
+    text-align: center;
+    font-size:16px;
+    font-weight:900;
+    text-shadow: 0 0 10px white;
+    transition: all 0.3s;
+
+}
+
+
+.select-size:hover
+{
+    transform: scale(1.05);
+}
+
+.pizza-form input[type='text']:enabled
+{
+    border: 2px solid grey;
+    padding: 5px;
+
+    text-align: center;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.pizza-form input[type='text']:focus {
+    background: lightyellow;
+    border-color: blue;
+    outline:none;
+ }
+
+ input[type='submit']
+{
+    width:70px;
+    height:30px;
+    border-radius:7px;
+    background:#c4c59e;
+    font-family: 'Noto Serif SC', serif;
+    font-weight:400;
+    font-size:18px;
+    outline:none;
+    border: 2px solid #9eb572; /* Параметры рамки */
+    box-shadow: 0 0 7px #666;
+    transition: all 0.3s;
+
+}
+
+
+
+
+input[type='submit']:hover
+{
+    transform: scale(1.1);
+    border: 2px solid #778d4e; /* Изменяем параметры рамки при наведении */
+    box-shadow: 0 0 10px #333;
+    background:#8c8c7b;
+    color:#f7f7e9;
+}
+
+input[type='submit']:active
+{
+     /* Изменяем параметры рамки при наведении */
+    box-shadow: 1px 1px 10px #333;
+    background:#a8ac94;
+}
+
+.pizza_elements img
+{
+    transition: all 0.3s;
+}
+
+.pizza_elements img:hover
+{
+    transform: scale(1.1)
+}
+/*end block pizza*/
+
+
+/* ABOUT US */
+
+
+.test
+{
+list-style-type:square;
+}
+
+.logo-link {
+    display: inline-block;
+    transition: transform 1s; /* Добавьте анимацию для плавного поворота */
+}
+
+.logo-link:hover {
+    transform: rotate(360deg); /* Поворачиваем логотип на 360 градусов при наведении */
+}
+
+.logo {
+    width: 500px; /* Начальный размер логотипа */
+}
+
+.sertificate {
+
+    background: linear-gradient(196.82deg,rebeccapurple,yellow);
+    border: 30px solid #40c4c8;
+    border-image: url(../pizzeria/static/pizzeria/images/ornament.png) 20 20 repeat;
+    font-family: Algerian, sans-serif !important;
+}
+
+.about p {
+    text-indent: 2em;
+    letter-spacing:2px/* Задаем отступ первой строки (красной строки) */
+    word-break: break-all;
+    word-spacing: 4px;
+    text-transform: capitalize;
+}
+
+.about dt
+{
+    font-variant: small-caps;
+}
+
+.company-name h1
+{
+    font-family: Playfair Display;
+    font-kerning: normal;
+}
+/* При необходимости можно указать другой цвет для красной строки */
+.about p::first-line {
+    color: red;
+}
+
+blockquote[lang="en"] {
+    color: blue;
+    font-style: italic;
+}
+
+/* Стиль для цитат на французском языке */
+blockquote[lang="fr"] {
+    color: red;
+    font-style: italic;
+}
+
+/* Стиль для цитат на испанском языке */
+blockquote[lang="es"] {
+    color: green;
+    font-style: italic;
+}
+
+
+/* END ABOUT US */
+
+
+/* banner */
+
+.image-container[id$='oll']
+{
+    height: 800px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 120s ease-in-out;
+}
+.image-container img:nth-child(1) {
+    animation: imageAnimation1 70s infinite;
+}
+.image-container img:nth-child(2) {
+    animation: imageAnimation2 70s infinite;
+}
+.image-container img:nth-child(3) {
+    animation: imageAnimation3 70s infinite;
+}
+.image-container img:nth-child(4) {
+    animation: imageAnimation4 70s infinite;
+}
+@keyframes imageAnimation1 {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-200%);
+    }
+    75% {
+        transform: translateX(-300%);
+    }
+}
+@keyframes imageAnimation2 {
+    0%, 100% {
+        transform: translateX(100%);
+    }
+    25% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    75% {
+        transform: translateX(-200%);
+    }
+}
+@keyframes imageAnimation3 {
+    0%, 100% {
+        transform: translateX(200%);
+    }
+    25% {
+        transform: translateX(100%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(-100%);
+    }
+}
+@keyframes imageAnimation4 {
+    0%, 100% {
+        transform: translateX(300%);
+    }
+    25% {
+        transform: translateX(200%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    75% {
+        transform: translateX(0);
+    }
+}
+/* endbanner */
+
+
+/* block news  */
+
+ul.news_list
+{
+   list-style: none; font-size: 20px; margin:40px;
+   max-width: 100%;
+   height:10%;
+}
+
+.news_list li>p{
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news_list .newss{
+    max-width: 100%;
+    height:10%;
+
+}
+
+.newss
+{
+    margin:50px;
+    padding:10px;
+    font-size: 16px;
+
+}
+
+.news_list .newss p{
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+section.maincontent article[id] h2[align='center']
+{
+    font-size:70px;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing:10px;
+    margin-bottom: 0px;
+    margin-top:10px;
+    align:center;
+}
+
+/* endblock news */
+
+/* news detail */
+.article-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Два элемента в первой колонке, один элемент во второй */
+  gap: 20px;
+  margin-left: 50px;
+  margin-right: 70px;
+}
+
+.article-image img {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+.article-text {
+  width: 100%; /* Занимает всю вторую колонку */
+}
+
+@media (max-width: 768px) {
+  /* При уменьшении экрана, отображать статью в одной колонке */
+  .article-container {
+    grid-template-columns: 1fr; /* Одна колонка */
+  }
+
+  .article-image img,
+  .article-text {
+    width: 100%; /* Занимает всю ширину на узком экране */
+  }
+}
+
+/* endblock */
+
+
+/* block footer */
+
+
+.footer a[href ^='https']
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer a
+{
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.footer a>p
+{
+    font-size:25px;
+
+}
+
+
+.footer .img-article[alt] {
+    border-radius: 100px; /* Радиус скругления */
+    border: 3px solid green; /* Параметры рамки */
+    box-shadow: 0 0 7px #666;
+    transition: all 0.5s;
+
+}
+
+.footer .img-article[alt]:hover {
+     cursor: grab;
+     transform: scale(1.1);
+     border: 3px solid blue; /* Изменяем параметры рамки при наведении */
+     box-shadow: 0 0 10px #333;
+
+
+}
+
+/* end block footer */

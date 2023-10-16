@@ -6,15 +6,15 @@
 {% endblock %}
 
 {% block main %}
-<section>
+<section class="about">
   <figure>
-  <figcaption><h1 align="center"> WE </h1></figcaption>
-    <p align="center"><a href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf">
-        <img src="{% static 'pizzeria/images/pizzatimelogo(mini).png' %}" alt="logo" width="500in"></a></p>
+  <figcaption class = 'company-name'><h1 align="center" style="font-size:48px"> PIZZA TIME </h1></figcaption>
+    <p align="center"><a class = 'logo-link' href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf">
+        <img src="{% static 'pizzeria/images/pizzatimelogo(mini).png' %}" alt="logo" width="500in" class = 'logo'></a></p>
     <p style = 'margin-left:50px; margin-right:50px; font-size:45px;'>
     <wbr>Usually people come to Pizza Time just to eat. Our promoters distribute leaflets about a slice of pizza for one ruble or something else profitable. We are doing this as the first step to get to know each other.
 
-But for us, Dodo is not just pizza. It's pizza too, but first of all it's a big deal that inspires us, makes us wake up every morning and continue working with interest.
+But for us, PizzaTime is not just pizza. It's pizza too, but first of all it's a big deal that inspires us, makes us wake up every morning and continue working with interest.
 
 What is our interest? Let's tell you now.
 </p>
@@ -51,5 +51,32 @@ What is our interest? Let's tell you now.
 
   </article>
 </section>
+
+<section class="sertificate sertificate-bg">
+    <br />
+    <div style="text-align:center;">CERTIFICATE OF MEMBERSHIP IN RBMW (REGISTRY OF THE BEST PIZZERIA IN THE WORLD)</div>
+    <br />
+    <br />
+    <br />
+    <div style="text-align:center">UNIFIED REGISTER OF PIZZERIAS</div>
+    <div style="text-align:center">CERTIFICATE</div>
+    <div style="text-align:center"><small>regarding the Inclusion of Information</small></div>
+    <br />
+
+    <div>
+        <p style=" text-align:left;">uezdniy gorod N </p> <p style="text-align:right;"> 32 may 2023</p>
+    </div>
+    <br />
+    <b>ООО "Zelenoglazoe taksi"</b>
+    <br />
+
+    <div class="gradient"></div>
+
+    Ivanov I.I.
+    <br />
+    A very important director
+
+</section>
+
 
 {% endblock %}

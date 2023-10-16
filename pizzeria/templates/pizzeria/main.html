@@ -2,62 +2,54 @@
 
 {% load static %}
 {% block pizzacontent %}
-<table class="table-content" border="0" cellpadding="0" cellspacing="100px" align="center">
-    <tr style=" text-align: center;">
-        {% for p in pizzass %}
-        {% if forloop.counter0|divisibleby:3 and not forloop.first %}
-        </tr><tr style=" text-align: center;">
-        {% endif %}
-        <td valign="top" class="left-chapters">
-            {% if p.0.image %}
-            <p>
-                <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width="300" height="300" title = "{{ p.0.name }}">
-            </p>
-            {% endif %}
-            <h2>{{p.0.name}}</h2>
-            {% load filters %}
-            {% if user|is_client %}
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" id="pizza_name" name="pizza_name" value="{{ p.0.name }}">
-                <label for="size" style = "font-size:20px">Choose size</label>
-                <select id="size" size="1" name="size" onchange="updateSizeField(this,'{{p.0.name}}')" style = "font-size:15px">
-                    {% for s in p %}
-                        <option {% if forloop.last %} selected {% endif %} value='{{ s.price }}'>
-                            {{ s.size.name }}
-                        </option>
-                    {% endfor %}
-                </select>
-                <br><br>
-                <input type="text" id="{{p.0.name}}" value="{{ p.2.price }}" readonly
-                       style = "border: none; outline:none; text-align: center; font-size:15px;font-weight:bold;">
-                <br><br>
-                <input type="submit" value="Add">
-            </form>
-            {% endif %}
-
-            <script>
-            function updateSizeField(select, id) {
-                var selectedSize = select.options[select.selectedIndex].value;
-                document.getElementById(id).value = selectedSize;
-            }
-            </script>
-        </td>
-        {% endfor %}
-    </tr>
-</table>
+<div class="table-content">
+  {% for p in pizzass %}
+    {% if forloop.counter0|divisibleby:3 and not forloop.first %}
+  </div>
+  <div class="table-content">
+    {% endif %}
+    <div class="pizza_elements">
+      {% if p.0.image %}
+      <p>
+        <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width='70%' height='70%' title="{{ p.0.name }}">
+      </p>
+      {% endif %}
+      <h2>{{p.0.name}}</h2>
+      {% load filters %}
+      {% if user|is_client %}
+      <form method="post" class="pizza-form">
+        {% csrf_token %}
+        <input type="hidden" id="pizza_name" name="pizza_name" value="{{ p.0.name }}">
+        <label for="size" style="font-size:20px">Choose size</label>
+        <select class="select-size" id="size" size="1" name="size" onchange="updateSizeField(this,'{{p.0.name}}')" align="center" >
+          {% for s in p %}
+          <option {% if forloop.last %} selected {% endif %} value="{{ s.price }}">
+            {{ s.size.name }}
+          </option>
+          {% endfor %}
+        </select>
+        <br><br>
+        <input type="text" id="{{p.0.name}}" value="{{ p.2.price }}" readonly class="select-pizza-inp">
+        <br><br>
+        <input type="submit" value="Add">
+      </form>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
 
 {% endblock %}
 
 
 
 {% block promocontent %}
+
+
+
 <table class="table-promo" border="0" cellpadding="0" cellspacing="100px" align="center">
     <tr style=" text-align: center;" align="center">
         <td colspan="3" style="font-size:25px">
-            <mark><q cite ='https://ru.wikipedia.org/wiki/Промокод'>
-                A wonderful day starts with a good promo code
-            </q></mark>
+
         </td>
     </tr>
             {% load filters %}
@@ -82,7 +74,7 @@
 {% block cartref %}
 {% load filters %}
 {% if user|is_client %}
- <a href="{% url 'cart' %}" style="text-decoration: none; color: inherit;">
+ <a href="{% url 'cart' %}">
      {{ m.title }} ({{ count }})
  </a>
 {% endif %}
@@ -102,16 +94,17 @@
     </tr>
     <tr>
         <td>
-            <a href="https://lidskae.by/" style="text-decoration: none; color: inherit;" target="_blank">
+
+            <a href="https://lidskae.by/" target="_blank">
                 <img class="img-article" src="{% static 'pizzeria/images/lidskae.png' %}" alt='lid bear'
                     width="150" height="150">
             </a>
             <a href="https://coca-cola.by/company/news/coca-cola-bez-sakhara-vkus-kotory-ne-peredat-slovami"
-                style="text-decoration: none; color: inherit;" target="_blank">
+                target="_blank">
                 <img class="img-article" src="{% static 'pizzeria/images/coca-cola.png' %}" alt='coca-colar'
                     width="150" height="150">
             </a>
-            <a href="https://www.heinz.ru/brand/Кетчуп" style="text-decoration: none; color: inherit;"
+            <a href="https://www.heinz.ru/brand/Кетчуп"
                 target="_blank">
                 <img class="img-article" src="{% static 'pizzeria/images/heinz.png' %}" alt='hienz'
                     width="150" height="80">
@@ -121,18 +114,18 @@
             <table>
                 <tr>
                     <td>
-                        <img class="img-article" src="{% static 'pizzeria/images/num.png' %}" alt='hienz'
+                        <img class="img-article" src="{% static 'pizzeria/images/num.png' %}"
                             width="50" height="50">
                     </td>
                     <td>
-                        <a href="tel:7898" style="text-decoration: none; color: inherit; font-size: 25px">
+                        <a href="tel:7898">
                             <p><em>7898</em></p>
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <img class="img-article" src="{% static 'pizzeria/images/addrres.png' %}" alt='hienz'
+                        <img class="img-article" src="{% static 'pizzeria/images/addrres.png' %}"
                             width="60" height="60">
                     </td>
                     <td>
@@ -142,7 +135,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <img class="img-article" src="{% static 'pizzeria/images/email.png' %}" alt='hienz'
+                        <img class="img-article" src="{% static 'pizzeria/images/email.png' %}"
                             width="60" height="60">
                     </td>
                     <td>
