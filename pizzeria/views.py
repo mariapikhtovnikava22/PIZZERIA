@@ -22,6 +22,9 @@ menu = [{'title': 'Pizza', 'url_name': 'pizza'},
         ]
 
 
+def test(request):
+    return render(request, 'pizzeria/test.html')
+
 def main(request):
     if request.method == 'GET':
 

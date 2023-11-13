@@ -25,14 +25,13 @@
               <a href="http://127.0.0.1:8000/#contacts">
                   Contacts
               </a></li>
-           <li>
-              <a href="{% url 'home' %}">
-                  Home
-              </a></li>
+          <li>
+              <a href="{% url 'home' %}"><img src="{% static 'pizzeria/images/pizza2.png' %}" alt="Pizza Time"></a>
+          </li>
           <li>
               <a href= "{% url 'info' %}">
                   Static info
-              </a> </li>
+              </a></li>
           <li class = 'last'>
               {% if user.is_authenticated %}
                 {% if user.is_superuser %}

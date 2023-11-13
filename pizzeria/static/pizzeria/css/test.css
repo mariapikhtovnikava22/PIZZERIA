@@ -1,0 +1,10 @@
+h1 + p {background-color: yellow;}
+h1 ~ p {color: blue;}
+
+div
+{
+    width:auto;
+    height:100px;
+    background-image:url(/static/pizzeria/images/bg.jpg)
+    background-position:right bottom;
+}

@@ -11,40 +11,42 @@ body
 
 
 /* navigation elements in base.html */
-
 [class*='navigation']
 {
-    border-top:3px solid gray;
-    border-bottom:3px solid gray;
-    background:#faf7de;
-    font-family: none;
-    top:0;
+     border: 1px solid #9eb572;
+     box-shadow: 0 0 7px #666;
+     background: #faf7de;
+     font-family: none;
+     text-align: center;
 }
 
 [class^='mainnav']
 {
+    border:none;
+    background:#f7f7e9;
     margin-bottom:150px;
+    margin-top:5px;
+    padding:10px;
 
+
+}
+.inline_panel ul
+{
+    margin:5px;
+    font-size:18px;
 }
 .inline_panel li
 {
     display: inline;
-
-
-}
-
-.inline_panel li:nth-child(2n)
-{
-    display: inline;
-    margin-right:10px;
-    background:#e0e7bd;
+    padding:10px;
+    vertical-align: middle;
 
 }
 
 .inline_panel a
 {
     text-decoration: none;
-    color: #68685f;
+    color:#505c44;
     transition: all 0.7s;
 }
 
@@ -52,10 +54,25 @@ body
 {
     text-decoration: overline;
     font-size:19px;
-    color:black;
+    color:#484848;
 }
 
 
+.inline_panel a img
+{
+    text-decoration: none;
+    height: 50px;
+    transition: all 0.7s;
+
+}
+
+
+.inline_panel a img:hover
+{
+    text-decoration: overline;
+    color: #68685f;
+    transform: scale(1.1)
+}
 
 .sticky-nav {
   position: sticky;
@@ -76,8 +93,6 @@ body
 
 
 /* info table */
-
-
 
 
 /* Убрать двойные линии между ячейками внутри таблицы */
@@ -135,7 +150,6 @@ body
     text-align: center;
     margin-bottom: 20px;
 }
-
 /* block info*/
 
 /* block pizza */
@@ -153,11 +167,11 @@ body
     text-align: center;
   }
 
-  @media (max-width: 50rem) { /* Если ширина окна менее 40rem (640px) */
-    .table-content {
-      grid-template-columns: repeat 1fr; /* 1 элемент в ряду */
-    }
+ @media (max-width: 70rem) {
+  .table-content {
+    grid-template-columns: repeat(1, 1fr); /* 1 элемент в ряду */
   }
+}
 
   .pizza_elements {
     text-align: center;
@@ -355,19 +369,19 @@ blockquote[lang="es"] {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: transform 120s ease-in-out;
+    transition: transform 30s ease-in-out;
 }
 .image-container img:nth-child(1) {
-    animation: imageAnimation1 70s infinite;
+    animation: imageAnimation1 20s infinite;
 }
 .image-container img:nth-child(2) {
-    animation: imageAnimation2 70s infinite;
+    animation: imageAnimation2 20s infinite;
 }
 .image-container img:nth-child(3) {
-    animation: imageAnimation3 70s infinite;
+    animation: imageAnimation3 20s infinite;
 }
 .image-container img:nth-child(4) {
-    animation: imageAnimation4 70s infinite;
+    animation: imageAnimation4 20s infinite;
 }
 @keyframes imageAnimation1 {
     0%, 100% {
