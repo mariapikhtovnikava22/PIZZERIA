@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block main %}
-<section class="about">
+<div id = 'content'>
+    <section class="about">
   <figure>
   <figcaption class = 'company-name'><h1 align="center" style="font-size:48px"> PIZZA TIME </h1></figcaption>
     <p align="center"><a class = 'logo-link' href="" download="https://resources-usc.gitlab.io/00-prof-jannie-jacobs/book--rest-in-pizza.pdf">
@@ -77,6 +78,102 @@ What is our interest? Let's tell you now.
     A very important director
 
 </section>
+</div>
+
+<h1 align="Center">Try yourself in design sphere </h1>
+<form id="styleForm" style = 'margin:50px; font-size:45px;'>
+    <label>
+        <input type="checkbox" id="fontCheckbox" onchange="updateStyles()" style="transform: scale(3); vertical-align:middle;"> Change Font Size
+        <div id="fontsizeinput"></div>
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" id="colorCheckbox" onchange="updateStyles()" style="transform: scale(3); vertical-align:middle;"> Change Text Color
+        <div id="textcolorinput"></div>
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" id="backgroundCheckbox" onchange="updateStyles()" style="transform: scale(3); vertical-align:middle;"> Change Background Color
+        <div id="backgroundinput"></div>
+    </label>
+</form>
+
+<style>
+#cont
+{
+    margin:50px;
+}
+    button {
+      background-color: #777;
+      border: none;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 3px;
+    }
+    input[type="number"] {
+      padding: 5px 10px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+    #random_table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      border: 1px solid black;
+    }
+    #random_table td {
+      border: 1px solid black;
+      text-align: center;
+      vertical-align: middle;
+      padding: 10px;
+      user-select: none;
+    }
+    .selected:nth-child(even) {
+      background-color: #816075;
+    }
+    .selected:nth-child(odd) {
+      background-color: #4e879b;
+    }
+</style>
+
+<button type="button" onclick="ShowResExtends()" style="font-size:23px; text-decoration:bold; margin:50px;">EXTENDS</button>
+
+<div id="cont">
+
+  <span>
+    <button onclick="addRow()">Add row</button>
+    <button onclick="addColumn()">Add column</button>
+    <button onclick="transpose()">Transpose</button>
+    Width:<input type="number" id="width" min="1" max="50" value="1">
+    Height:<input type="number" id="height" min="1" max="50" value="1">
+    <button onclick="
+    var width = document.querySelector('#width').value;
+    var height = document.querySelector('#height').value;
+
+    createTable(height, width)">Create table</button>
+
+    Max select:<input type="number" id="maxSelect" min="1" max="50" value="1">
+  </span>
+</div>
 
 
+
+<div class = 'latesdate' style="margin:50px;">
+    <form id="dateForm">
+    <label for="date">Enter Date (DD/MM/YYYY):</label>
+    <input type="text" id="date" name="date" required>
+    <button type="button" onclick="addDate()">Add Date</button>
+    <button type="button" onclick="findLatestDate()">Find Latest Date</button>
+</form>
+<div id="inputData">
+    <h3>Input Dates:</h3>
+    <ul id="datesList"></ul>
+</div>
+<div id="result"></div>
+</div>
+
+ <script src="{% static 'pizzeria/js/extends.js' %}" defer></script>
+<script src="{% static 'pizzeria/js/changecolors.js' %}" defer></script>
+<script src="{% static 'pizzeria/js/matrix.js' %}" defer></script>
+<script src="{% static 'pizzeria/js/imagescroll.js' %}" defer></script>
 {% endblock %}

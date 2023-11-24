@@ -109,6 +109,7 @@ class Promo(models.Model):
     expiration_date = models.DateTimeField()
     is_archived = models.BooleanField(default=False)
 
+
     class Meta:
         ordering = ('-created',)
 

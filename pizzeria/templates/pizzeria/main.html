@@ -45,9 +45,6 @@
 
 
 {% block promocontent %}
-
-
-
 <table class="table-promo" border="0" cellpadding="0" cellspacing="100px" align="center">
     <tr style=" text-align: center;" align="center">
         <td colspan="3" style="font-size:25px">
@@ -65,8 +62,9 @@
                 <img class="img-article" src="{{p.image.url}}" alt="{{ p.name }}" width="300" height="500" title = "{{ p.name }}">
             </p>
             {% endif %}
+
             <h2>{{p.code}}</h2>
-        </td>
+
         {% endfor %}
     </tr>
 </table>
