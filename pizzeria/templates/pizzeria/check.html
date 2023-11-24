@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Verification</title>
+    <script src="{% static 'pizzeria/js/age.js' %}" defer></script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        div {
+            text-align: center;
+        }
+        button
+        {
+            font-size:25px;
+            background:orange;
+        }
+        button:hover
+        {
+            background:gray;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1 style="font-size:45px">Age verification</h1>
+    <span><button onclick="calculateAgeAndVerify()" >Проверить возраст</button></span>
+</div>
+
+</body>
+</html>

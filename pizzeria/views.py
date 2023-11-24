@@ -3,6 +3,7 @@ from datetime import date, timedelta
 import requests
 from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.db.models import Count
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -24,6 +25,11 @@ menu = [{'title': 'Pizza', 'url_name': 'pizza'},
 
 def test(request):
     return render(request, 'pizzeria/test.html')
+
+
+def check(request):
+    return render(request, 'pizzeria/check.html')
+
 
 def main(request):
     if request.method == 'GET':
@@ -61,8 +67,8 @@ def main(request):
         cart_item = CartItem.objects.create(pizza=pizza_)
         cart_.items.add(cart_item)
         cart_.save()
-
-        return HttpResponseRedirect(request.path_info)
+        count = cart_.items.count()
+        return JsonResponse({'count': count})
 
 
 def faq(request):
@@ -181,7 +187,6 @@ def cart(request):
 
 
 def personal_account(request):
-
     if request.method == 'GET':
         user = CustomUserChangeForm(instance=request.user)
         order_ = Order.objects.all()
@@ -189,12 +194,29 @@ def personal_account(request):
 
         for order in order_:
             pizza_ids = order.items.values_list('pizza', flat=True)
+            print(pizza_ids)
 
+            # Создайте словарь для хранения количества повторений каждого идентификатора
+            pizza_counts = {}
+            for pizza_id in pizza_ids:
+                if pizza_id in pizza_counts:
+                    pizza_counts[pizza_id] += 1
+                else:
+                    pizza_counts[pizza_id] = 1
+
+            # Получить объекты PizzaType с учетом количества повторений
             pizzas_in_order = PizzaType.objects.filter(id__in=pizza_ids)
 
-            order_price = sum(pizza.price for pizza in pizzas_in_order)
+            # Теперь у вас есть QuerySet, который содержит объекты PizzaType и их количество в заказе
+            for pizza in pizzas_in_order:
+                count = pizza_counts.get(pizza.id, 0)  # Получаем количество или 0, если нет записи
+                print(f"Pizza ID: {pizza.id}, Count: {count}")
+
+            order_price = sum(pizza.price * pizza_counts.get(pizza.id, 0) for pizza in pizzas_in_order)
+            print('order', order_price)
 
             total_price += order_price
+            print(total_price)
 
         context = {"order_list": order_, "total_price": total_price, 'form': user}
 

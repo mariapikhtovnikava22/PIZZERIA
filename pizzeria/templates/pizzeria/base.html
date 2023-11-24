@@ -9,12 +9,24 @@
     <link rel="icon" href="{% static 'pizzeria/images/icons8.png' %}" type="image/x-icon">
     <link rel = 'stylesheet' type="text/css" href="{% static 'pizzeria/css/styles.css' %}">
     <script src="{% static 'pizzeria/js/scroll.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/main.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/banner.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/pizza_cards.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/timer.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/test.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/extends.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/promocodes.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/tableDate.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/imagescroll.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/changecolors.js' %}" defer></script>
+    <script src="{% static 'pizzeria/js/matrix.js' %}" defer></script>
     <meta charset="UTF-8">
 </head>
 <body>
 {% block header%}
 <header>
   <nav class = 'header-navigation sticky-nav' id = 'navbar'>
+      <div id="countdown"></div>
     <div class = 'inline_panel'>
       <ul>
           <li>
@@ -29,7 +41,7 @@
               <a href="{% url 'home' %}"><img src="{% static 'pizzeria/images/pizza2.png' %}" alt="Pizza Time"></a>
           </li>
           <li>
-              <a href= "{% url 'info' %}">
+              <a href= "{% url 'check' %}">
                   Static info
               </a></li>
           <li class = 'last'>
@@ -53,18 +65,26 @@
 
 <main>
 
-    <div class="image-container" id = 'markscroll'>
-        <img src="{% static 'pizzeria/images/rec.png' %}" alt="Banner #1">
-        <img src="{% static 'pizzeria/images/rec2.png' %}" alt="Banner #2">
-        <img src="{% static 'pizzeria/images/rec3.png' %}" alt="Banner #3">
-        <img src="{% static 'pizzeria/images/rec4.png' %}" alt="Banner #4">
+    <div class="image-container" id = 'imageContainer'>
+        <img src="{% static 'pizzeria/images/rec.png' %}" alt="Banner #1" class = 'banner'>
+        <img src="{% static 'pizzeria/images/rec2.png' %}" alt="Banner #2" class = 'banner'>
+        <img src="{% static 'pizzeria/images/rec3.png' %}" alt="Banner #3" class = 'banner'>
+        <img src="{% static 'pizzeria/images/rec4.png' %}" alt="Banner #4" class = 'banner'>
     </div>
-
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+              <div align="center" id="adminSelectBar">
+                   <h1 align="center">Banner settings</h1>
+                  <form>
+                       <span>Animation duration</span> <input type="range" min="1" max="200" step="1" id="animationTime">
+                  </form>
+              </div>
+        {% endif %}
+        {% endif %}
 
     <nav class="mainnavigation">
         <div class="inline_panel" >
             <ul style="padding:0;">
-
               {% for m in menu %}
                 {% if m.title == 'Pizza' %}
                 <li class="prelast">
@@ -77,7 +97,7 @@
                         {{ m.title }}
                     </a></li>
                 {% elif forloop.revcounter == 2  %}
-                <li class="prelast" style='display: inline; margin-right: 850px;'>
+                <li class="prelast">
                     <a href="#promo">
                         {{ m.title }}
                     </a></li>
@@ -109,15 +129,13 @@
 {% endblock %}
 
 <footer style = 'margin:0px' class = 'block-footer'>
-    <hr>
-    {% block footer %}
-    {% endblock %}
-    <hr>
+    <hr id = 'contacts'>
+
+<!--    {% block footer %}-->
+<!--    {% endblock %}-->
+<!--    <hr>-->
       <p>©Авторские права никому не принадлежат, 2023. Все права защищены.</p>
     <hr>
 </footer>
-
-
-
 </body>
 </html>

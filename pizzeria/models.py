@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils import timezone
 
@@ -41,6 +43,7 @@ class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, validators=[phone_regex], default='+375 (29) XXX-XX-XX')
     address = models.CharField(max_length=100)
+
 
     def __str__(self):
         return f'{self.user.username}'
@@ -142,3 +145,5 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+

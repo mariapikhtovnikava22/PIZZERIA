@@ -18,5 +18,6 @@ urlpatterns = [
     path('news/<int:article_id>/', news_detail, name='news_detail'),
     path('infos', info, name='info'),
     path('test', test, name='tests'),
+    path('check', check, name='check')
 
 ]

@@ -8,7 +8,7 @@
   </div>
   <div class="table-content">
     {% endif %}
-    <div class="pizza_elements">
+    <div class="pizza_elements card-wrapper">
       {% if p.0.image %}
       <p>
         <img class="img-article" src="{{p.0.image.url}}" alt="{{ p.0.name }}" width='70%' height='70%' title="{{ p.0.name }}">
@@ -31,12 +31,14 @@
         <br><br>
         <input type="text" id="{{p.0.name}}" value="{{ p.2.price }}" readonly class="select-pizza-inp">
         <br><br>
-        <input type="submit" value="Add">
+          <input type="submit" value="Add">
       </form>
       {% endif %}
     </div>
+
   {% endfor %}
 </div>
+
 
 {% endblock %}
 
