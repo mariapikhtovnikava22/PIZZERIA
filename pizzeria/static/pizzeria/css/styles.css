@@ -75,17 +75,6 @@ body
 
 }
 
-.truck {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-#trucks {
-    background-size: cover;
-
-}
 
 
 .inline_panel a img:hover
@@ -315,11 +304,11 @@ input[type='submit']:active
 
 
 /* ABOUT US */
-
-
-.test
+#content
 {
-list-style-type:square;
+    font-size:35px;
+    text-align:center;
+    margin-left-left:50px;
 }
 
 .logo-link {
@@ -337,9 +326,9 @@ list-style-type:square;
 
 .sertificate {
 
-    background: linear-gradient(196.82deg,rebeccapurple,yellow);
+    background: url(../images/bg.jpg);
     border: 30px solid #40c4c8;
-    border-image: url(../pizzeria/static/pizzeria/images/ornament.png) 20 20 repeat;
+    border-image: url(../images/ornament.png) 20 20 repeat;
     font-family: Algerian, sans-serif !important;
 }
 

@@ -25,42 +25,60 @@ function updateStyles() {
 
 
     if (fontCheckbox.checked) {
-
-        let textInput = document.createElement("input");
-        textInput.id="textInput"
-        textInput.type = "number";
-        textInput.min = "10";
-        textInput.max = "100";
-        textInput.onchange = function () {
-            content.style.fontSize = `${this.value}px`;
-        };
-
-        var parent = document.getElementById("fontsizeinput");
-        parent.insertAdjacentElement('afterend', textInput);
-    }
-    if (colorCheckbox.checked) {
-        // Используйте let вместо var, чтобы создать новую переменную внутри блока
-        let colorInput = document.createElement("input");
-        colorInput.id="colorInput"
-        colorInput.type = "color";
-        colorInput.value = "#000000";
-        colorInput.onchange = function () {
-            content.style.color = this.value;
-        };
-
-        var parent = document.getElementById("textcolorinput");
-        parent.insertAdjacentElement('afterend', colorInput);
+        sizeInp();
     }
     if (backgroundCheckbox.checked) {
-        let BackcolorInput = document.createElement("input");
-        BackcolorInput.id="BackcolorInput"
-        BackcolorInput.type = "color";
-        BackcolorInput.value = "#ffffff";
-        BackcolorInput.onchange = function () {
-             content.style.background = this.value;
-        };
-
-        var parent = document.getElementById("backgroundinput");
-        parent.insertAdjacentElement('afterend', BackcolorInput);
+        ColorInp();
     }
+    if (backgroundCheckbox.checked) {
+        BackColor();
+    }
+
+}
+
+function ColorInp()
+{
+    // Используйте let вместо var, чтобы создать новую переменную внутри блока
+    let colorInput = document.createElement("input");
+    colorInput.id="colorInput"
+    colorInput.type = "color";
+    colorInput.value = "#000000";
+    colorInput.onchange = function () {
+        content.style.color = this.value;
+    };
+
+    var parent = document.getElementById("textcolorinput");
+    parent.insertAdjacentElement('afterend', colorInput);
+}
+
+function sizeInp()
+{
+    let textInput = document.createElement("input");
+    textInput.id="textInput"
+    textInput.type = "number";
+    const size = window.getComputedStyle(document.getElementById('content')).fontSize;
+    textInput.value = parseFloat(size);
+    textInput.min = "10";
+    textInput.max = "100";
+    textInput.onchange = function () {
+        content.style.fontSize = `${this.value}px`;
+    };
+
+    var parent = document.getElementById("fontsizeinput");
+    parent.insertAdjacentElement('afterend', textInput);
+}
+
+function BackColor()
+{
+    let BackcolorInput = document.createElement("input");
+    BackcolorInput.id="BackcolorInput"
+    BackcolorInput.type = "color";
+    BackcolorInput.value = "#ffffff";
+    BackcolorInput.onchange = function () {
+         content.style.background = this.value;
+    };
+
+    var parent = document.getElementById("backgroundinput");
+    parent.insertAdjacentElement('afterend', BackcolorInput);
+
 }

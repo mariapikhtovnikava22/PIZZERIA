@@ -1,3 +1,16 @@
+const today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+
+const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+
+const yyyy = today.getFullYear();
+
+const formattedToday = `${yyyy}-${mm}-${dd}`;
+
+// Устанавливаем максимальную дату для input
+document.getElementById('date').max = formattedToday;
+document.getElementById('date').value = formattedToday;
+
 // Ассоциативный массив для хранения дат
 const dates = [];
 
