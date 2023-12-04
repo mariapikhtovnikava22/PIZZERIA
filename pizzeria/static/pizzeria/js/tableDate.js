@@ -16,23 +16,25 @@ const dates = [];
 
 // Функция для добавления даты в массив
 function addDate() {
+
     const dateInput = document.getElementById('date');
     const dateString = dateInput.value;
 
     // Парсим введенную строку с датой
-    const parts = dateString.split('/');
-    const day = parseInt(parts[0]);
+    const parts = dateString.split('-');
+    const day = parseInt(parts[2]);
     const month = parseInt(parts[1]);
-    const year = parseInt(parts[2]);
+    const year = parseInt(parts[0]);
 
     // Проверяем корректность введенной даты
     if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
         dates.push({ day, month, year });
-        dateInput.value = ''; // Очищаем поле ввода
+        dateInput.value = dateString; // Очищаем поле ввода
         displayInputDates(); // Обновляем вывод входных данных
     } else {
-        alert('Invalid date format. Please use DD/MM/YYYY.');
+        alert('Invalid date format. Please use YYYY-MM-DD.');
     }
+
 }
 
 // Функция для поиска самой поздней даты
@@ -55,7 +57,7 @@ function findLatestDate() {
 
     // Выводим результат
     const resultElement = document.getElementById('result');
-    resultElement.textContent = `The latest date is: ${latestDate.day}/${latestDate.month}/${latestDate.year}`;
+    resultElement.textContent = `The latest date is: ${latestDate.year}-${latestDate.month}-${latestDate.day}`;
 }
 
 // Функция для отображения входных данных
@@ -65,7 +67,7 @@ function displayInputDates() {
 
     dates.forEach(date => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${date.day}/${date.month}/${date.year}`;
+        listItem.textContent = `${date.year}-${date.month}-${date.day}`;
         datesList.appendChild(listItem);
     });
 }

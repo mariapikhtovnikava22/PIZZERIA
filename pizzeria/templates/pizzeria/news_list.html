@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block main %}
-<ul class="news_list" >
+<div class="news_list" >
     {% for article in articles %}
-      <li>
+      <div class = "box {% if forloop.first %}show{% endif %}">
         <h2 align="center">{{ article.title }}</h2>
         <img src="{{ article.image.url }}" alt="{{ article.title }}" width="100%" height="100%">
-          <p class ="main-p-in-news" style = 'font-size:25px'>{{article.content|safe}}<wbr></p>
+          <p class ="main-p-in-news" >{{article.content|safe}}<wbr></p>
           <a href="{% url 'news_detail' article.pk %}">Read more</a>
-      </li>
+      </div>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
