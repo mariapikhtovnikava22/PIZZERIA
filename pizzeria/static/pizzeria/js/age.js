@@ -33,8 +33,13 @@ function calculateAgeAndVerify() {
         return;
     }
 
+
     // Рассчитываем возраст
-    const age = now.getFullYear() - dob.getFullYear();
+    let age = now.getFullYear() - dob.getFullYear();
+    if (dob.getDate() > now.getDate())
+    {
+        age = age - 1;
+    }
 
     // Определяем день недели
     const daysOfWeek = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];

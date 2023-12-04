@@ -27,7 +27,7 @@ function updateStyles() {
     if (fontCheckbox.checked) {
         sizeInp();
     }
-    if (backgroundCheckbox.checked) {
+    if (colorCheckbox.checked) {
         ColorInp();
     }
     if (backgroundCheckbox.checked) {
